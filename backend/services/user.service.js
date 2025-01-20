@@ -1,9 +1,12 @@
-import userModel from "../models/user.model.js";
+import userModel from '../models/user.model.js';
 
-export const createUser = async({
-    email ,  password
-}) =>{
-    if(!email || !password){
+
+
+export const createUser = async ({
+    email, password
+}) => {
+
+    if (!email || !password) {
         throw new Error('Email and password are required');
     }
 
@@ -15,4 +18,12 @@ export const createUser = async({
     });
 
     return user;
+
+}
+
+export const getAllUsers = async ({ userId }) => {
+    const users = await userModel.find({
+        _id: { $ne: userId }
+    });
+    return users;
 }
